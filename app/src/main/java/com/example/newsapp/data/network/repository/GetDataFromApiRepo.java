@@ -1,5 +1,7 @@
 package com.example.newsapp.data.network.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.newsapp.data.network.dto.ArticleNetworkDto;
@@ -30,8 +32,9 @@ public class GetDataFromApiRepo implements GetDataByKeyRepository<String, Single
 
     @Override
     public Single<Result> getByKey(String query) {
-
+        Log.wtf("AAAAA", "-> in getByKey network");
         return networkClient.doRequest(query).map(response -> {
+            Log.wtf("AAAAA", "-> in getByKey response");
             if (response instanceof ErrorResponse) {
                 return new Error(((ErrorResponse) response).errorType);
             } else {

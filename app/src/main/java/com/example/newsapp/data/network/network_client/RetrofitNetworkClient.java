@@ -28,13 +28,14 @@ public class RetrofitNetworkClient implements NetworkClient {
 
     @Override
     public Single<Response> doRequest(String query) {
+        Log.wtf("AAAAA", "-> in networkClient");
         ErrorType errorType;
         if (!isConnected()) {
             errorType = ErrorType.NO_INTERNET;
         } else {
             try {
                 return newsApiService.getArticles(query)
-                        .map(successResponse -> (Response) successResponse);
+                        .map(successResponse -> successResponse);
             } catch (Exception Exception) {
                 errorType = ErrorType.SERVER_ERROR;
             }

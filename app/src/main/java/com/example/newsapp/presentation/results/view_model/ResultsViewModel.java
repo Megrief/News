@@ -108,9 +108,7 @@ public class ResultsViewModel extends ViewModel {
                 .zipWith(getLastSelectedRepo.get(), (themeItemList, lastSelected) ->
                         provideAlertDialog(themeItemList, lastSelected, context)
                 ).observeOn(AndroidSchedulers.mainThread())
-                .flatMapCompletable(builder -> {
-                    return Completable.fromRunnable(builder::show);
-                })
+                .flatMapCompletable(builder -> Completable.fromRunnable(builder::show))
                 .subscribeOn(Schedulers.io())
                 .subscribe();
 
@@ -127,10 +125,8 @@ public class ResultsViewModel extends ViewModel {
                     }
                 }).flatMapCompletable(storeArticlesRepo::store)
                 .andThen(getArticlesRepo.get())
-                .doOnError(this::handleError)
-                .doOnSuccess(this::handleSuccess)
                 .subscribeOn(Schedulers.io())
-                .subscribe();
+                .subscribe(this::handleSuccess, this::handleError);
         compositeDisposable.add(refreshChain);
     }
 
@@ -165,7 +161,6 @@ public class ResultsViewModel extends ViewModel {
                     } catch (FinalError error) {
                         return Single.error(error);
                     }
-
                 }).doOnError(this::handleError);
     }
 

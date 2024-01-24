@@ -9,6 +9,6 @@ import retrofit2.http.Query;
 
 public interface NewsApiService {
 
-    @GET("everything?sortBy=publishedAt&pageSize=50&apiKey=acadfab60e91425d9f2bcaa2ce1649ae")
+    @GET("everything?sortBy=publishedAt&pageSize=50&apiKey=66e0e482d2ef4277b6aa7565b72be7a8")
     Single<SuccessResponse> getArticles(@Query("q") String query);
 }
