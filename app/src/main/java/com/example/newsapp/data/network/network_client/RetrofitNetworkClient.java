@@ -4,7 +4,6 @@ package com.example.newsapp.data.network.network_client;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.util.Log;
 
 import com.example.newsapp.data.network.NewsApiService;
 import com.example.newsapp.data.network.response.ErrorResponse;

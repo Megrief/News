@@ -126,7 +126,13 @@ public class ResultsViewModel extends ViewModel {
                 }).flatMapCompletable(storeArticlesRepo::store)
                 .andThen(getArticlesRepo.get())
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe((articles, throwable) -> {
+                    if (throwable != null) {
+                        handleError(throwable);
+                    } else {
+                        handleSuccess(articles);
+                    }
+                });
         compositeDisposable.add(refreshChain);
     }
 
@@ -134,34 +140,28 @@ public class ResultsViewModel extends ViewModel {
         return deleteArticlesRepo.delete().andThen(getThemeItemDbRepo.get())
                 .map(this::mapThemes)
                 .flatMapObservable(Observable::fromIterable)
-                .doOnError(this::handleError)
                 .flatMapSingle(getArticlesNetworkRepo::getByKey)
                 .collect(Collectors.toList())
-                .map(this::handleResults)
-                .doOnError(this::handleError);
+                .map(this::handleResults);
     }
 
     private Single<List<Article>> withFilter() {
         return deleteArticlesRepo.delete().andThen(getLastSelectedRepo.get())
                 .flatMap(getThemeItemByKeyDbRepo::getByKey)
                 .flatMap(themeItem -> getArticlesNetworkRepo.getByKey(themeItem.theme))
-                .flatMap(result -> {
-                    try {
-                        if (result instanceof Success) {
-                            List<Article> articles = ((Success) result).results;
-                            if (articles.isEmpty()) {
-                                throw new FinalError(ErrorType.NO_RESULTS);
-                            } else {
-                                return Single.just(articles);
-                            }
+                .map(result -> {
+                    if (result instanceof Success) {
+                        List<Article> articles = ((Success) result).results;
+                        if (articles.isEmpty()) {
+                            throw new FinalError(ErrorType.NO_RESULTS);
                         } else {
-                            assert result instanceof Error;
-                            throw new FinalError(((Error) result).errorType);
+                            return articles;
                         }
-                    } catch (FinalError error) {
-                        return Single.error(error);
+                    } else {
+                        assert result instanceof Error;
+                        throw new FinalError(((Error) result).errorType);
                     }
-                }).doOnError(this::handleError);
+                });
     }
 
     @NonNull

@@ -67,9 +67,7 @@ public class ResultsFragment extends Fragment {
         configureList();
         setupScreenStateObserver();
         configureFilterButton();
-        binding.settingsButton.setOnClickListener(fab -> {
-            viewModel.showFiltersDialog(requireContext());
-        });
+        binding.settingsButton.setOnClickListener(iv -> viewModel.showFiltersDialog(requireContext()));
 
     }
 
