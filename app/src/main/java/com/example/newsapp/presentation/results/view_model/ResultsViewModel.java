@@ -128,11 +128,7 @@ public class ResultsViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .subscribe((articles, throwable) -> {
                     if (throwable != null) {
-                        if (throwable instanceof FinalError) {
-                            screenState.postValue(new ErrorState(((FinalError) throwable).errorType));
-                        } else {
-                            screenState.postValue(new ErrorState(ErrorType.SERVER_ERROR));
-                        }
+                        handleError(throwable);
                     } else {
                         handleSuccess(articles);
                     }
@@ -144,11 +140,9 @@ public class ResultsViewModel extends ViewModel {
         return deleteArticlesRepo.delete().andThen(getThemeItemDbRepo.get())
                 .map(this::mapThemes)
                 .flatMapObservable(Observable::fromIterable)
-                .doOnError(this::handleError)
                 .flatMapSingle(getArticlesNetworkRepo::getByKey)
                 .collect(Collectors.toList())
-                .map(this::handleResults)
-                .doOnError(this::handleError);
+                .map(this::handleResults);
     }
 
     private Single<List<Article>> withFilter() {
@@ -167,7 +161,7 @@ public class ResultsViewModel extends ViewModel {
                         assert result instanceof Error;
                         throw new FinalError(((Error) result).errorType);
                     }
-                }).doOnError(this::handleError);
+                });
     }
 
     @NonNull
