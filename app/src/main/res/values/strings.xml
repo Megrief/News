@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="filters">Фильтрация</string>
+    <string name="news">Новости</string>
+    <string name="settings">Настройки</string>
+    <string name="no_internet_connection">Отсутствует подключение к интернету</string>
+    <string name="server_error">Ошибка сервера</string>
+    <string name="themes">Темы новостей</string>
+    <string name="create">Создать</string>
+    <string name="save">Сохранить</string>
+    <string name="input_theme_text">Введите название темы</string>
+    <string name="theme_creation">Создание темы</string>
+    <string name="theme_editing">Изменение темы</string>
+    <string name="add_theme">Добавить тему</string>
+    <string name="choose_theme">Выберите тему</string>
+    <string name="no_added_themes">Нет добавленных тем</string>
+    <string name="nothing_found">Новостей не найдено</string>
+    <string name="clear_filter">Сбросить фильтр</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="you_sure">Хотите удалить тему?</string>
+</resources>

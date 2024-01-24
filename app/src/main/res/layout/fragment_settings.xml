@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/primary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.newsapp.presentation.settings.SettingsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/theme_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/no_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:text="@string/no_added_themes"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:layout_gravity="center" />
+
+    <!-- Theme creation -->
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/shadow"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_hideable="true"
+        android:paddingBottom="48dp"
+        android:background="@drawable/bottom_sheet_background"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/pull_view_background"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_marginTop="18dp"
+            android:textSize="18sp"
+            android:textColor="@color/on_primary"
+            android:text="@string/theme_creation" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/edit_text_background">
+
+            <EditText
+                android:id="@+id/theme_value"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="8dp"
+                android:maxLines="1"
+                android:maxLength="40"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:hint="@string/input_theme_text"
+                android:textColorHint="@color/secondary_text_color"
+                android:textColor="@color/on_primary"
+                android:background="@android:color/transparent"
+                android:inputType="text" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:paddingHorizontal="12dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="36dp"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/on_secondary"
+            android:background="@drawable/button_background"
+            android:enabled="false"
+            android:text="@string/create" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

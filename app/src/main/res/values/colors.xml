@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#DAD4CF</color>
+    <color name="edit_text_field">#E8DFD8</color>
+    <color name="secondary">#554C45</color>
+    <color name="on_primary">#1B1511</color>
+    <color name="on_secondary">#DCC6B3</color>
+    <color name="new_background">#FAF4EF</color>
+    <color name="secondary_text_color">#514F4D</color>
+    <color name="shadow">#803D3A36</color>
+    <color name="filters_on_color">#50594B</color>
+</resources>
