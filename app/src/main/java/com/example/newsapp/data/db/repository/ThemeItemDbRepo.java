@@ -6,7 +6,6 @@ import com.example.newsapp.data.db.dao.ThemeItemDbDao;
 import com.example.newsapp.data.db.dto.ThemeItemDb;
 import com.example.newsapp.domain.entity.ThemeItem;
 import com.example.newsapp.domain.repository.DeleteDataByKeyRepository;
-import com.example.newsapp.domain.repository.DeleteDataRepository;
 import com.example.newsapp.domain.repository.GetDataByKeyRepository;
 import com.example.newsapp.domain.repository.GetDataRepository;
 import com.example.newsapp.domain.repository.StoreDataRepository;
@@ -33,9 +32,9 @@ public class ThemeItemDbRepo implements GetDataRepository<Single<List<ThemeItem>
 
     @Override
     public Completable delete(ThemeItem theme) {
-        return Completable.fromRunnable(() -> {
-            dao.deleteTheme(Mapper.toThemeItemDb(theme));
-        });
+        return Completable.fromRunnable(() ->
+                dao.deleteTheme(Mapper.toThemeItemDb(theme))
+        );
     }
 
     @Override
@@ -52,9 +51,9 @@ public class ThemeItemDbRepo implements GetDataRepository<Single<List<ThemeItem>
 
     @Override
     public Completable store(ThemeItem theme) {
-        return Completable.fromRunnable(() -> {
-            dao.storeThemeItem(Mapper.toThemeItemDb(theme));
-        });
+        return Completable.fromRunnable(() ->
+                dao.storeThemeItem(Mapper.toThemeItemDb(theme))
+        );
     }
 
     @Override

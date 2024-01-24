@@ -7,7 +7,8 @@ import com.example.newsapp.domain.entity.Article;
 import com.example.newsapp.domain.entity.DateContainer;
 import com.example.newsapp.domain.entity.Entity;
 
-public class EntityDiffCallback extends DiffUtil.ItemCallback<Entity> {
+public class
+EntityDiffCallback extends DiffUtil.ItemCallback<Entity> {
 
     @Override
     public boolean areItemsTheSame(@NonNull Entity oldItem, @NonNull Entity newItem) {

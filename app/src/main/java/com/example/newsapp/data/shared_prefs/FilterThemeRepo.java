@@ -8,7 +8,8 @@ import com.example.newsapp.domain.repository.StoreDataRepository;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
-public class FilterThemeRepo implements GetDataRepository<Single<Long>>, StoreDataRepository<Long> {
+public class
+FilterThemeRepo implements GetDataRepository<Single<Long>>, StoreDataRepository<Long> {
     private final SharedPreferences sharedPreferences;
     private final static String LAST_SELECTED_KEY = "LAST_SELECTED_KEY";
 

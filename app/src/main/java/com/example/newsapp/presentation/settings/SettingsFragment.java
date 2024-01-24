@@ -122,9 +122,7 @@ public class SettingsFragment extends Fragment {
 
     private void configureResultsList() {
         ThemeAdapter adapter = new ThemeAdapter(
-                themeItem -> {
-                    viewModel.showDeleteDialog(requireContext(), themeItem).show();
-                },
+                themeItem -> viewModel.showDeleteDialog(requireContext(), themeItem).show(),
                 themeItem -> {
                     binding.header.setText(R.string.theme_editing);
                     binding.accept.setText(R.string.save);

@@ -108,9 +108,7 @@ public class ResultsViewModel extends ViewModel {
                 .zipWith(getLastSelectedRepo.get(), (themeItemList, lastSelected) ->
                         provideAlertDialog(themeItemList, lastSelected, context)
                 ).observeOn(AndroidSchedulers.mainThread())
-                .flatMapCompletable(builder -> {
-                    return Completable.fromRunnable(builder::show);
-                })
+                .flatMapCompletable(builder -> Completable.fromRunnable(builder::show))
                 .subscribeOn(Schedulers.io())
                 .subscribe();
 

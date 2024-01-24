@@ -11,7 +11,8 @@ import com.example.newsapp.domain.entity.ThemeItem;
 
 public class Mapper {
 
-    public static Article toArticle(ArticleDb articleDb) {
+    @NonNull
+    public static Article toArticle(@NonNull ArticleDb articleDb) {
         return new Article(
             articleDb.title,
             articleDb.source,
@@ -23,7 +24,8 @@ public class Mapper {
         );
     }
 
-    public static ArticleDb toArticleDb(Article article) {
+    @NonNull
+    public static ArticleDb toArticleDb(@NonNull Article article) {
         return new ArticleDb(
                 article.getId(),
                 article.getTitle(),
@@ -45,7 +47,8 @@ public class Mapper {
         return new ThemeItem(themeItemDb.theme, themeItemDb.id);
     }
 
-    public static Article toArticle(ArticleNetworkDto dto) {
+    @NonNull
+    public static Article toArticle(@NonNull ArticleNetworkDto dto) {
         return new Article(
                 dto.getTitle(),
                 dto.getSource(),
@@ -57,7 +60,8 @@ public class Mapper {
         );
     }
 
-    private static String formatDate(String publishedAt) {
+    @NonNull
+    private static String formatDate(@NonNull String publishedAt) {
         int index = publishedAt.indexOf("T");
         return publishedAt.substring(0, index);
     }
