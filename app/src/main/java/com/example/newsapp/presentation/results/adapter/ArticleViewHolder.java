@@ -18,7 +18,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(Article item) {
+    public void bind(@NonNull Article item) {
         if (item.getUrlToImage().isEmpty()) {
             binding.articleImage.setVisibility(View.GONE);
         } else {

@@ -79,12 +79,12 @@ public class SettingsViewModel extends ViewModel {
         } else {
             themeItem = new ThemeItem(value, 0);
         }
-        compositeDisposable.add(
-                storeThemeItem.store(themeItem)
-                        .doOnComplete(this::refreshThemeList)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe()
-        );
+
+        Disposable disposable = storeThemeItem.store(themeItem)
+                .doOnComplete(this::refreshThemeList)
+                .subscribeOn(Schedulers.io())
+                .subscribe();
+        compositeDisposable.add(disposable);
         needToRefresh.postValue(true);
     }
 
@@ -96,12 +96,11 @@ public class SettingsViewModel extends ViewModel {
     }
 
     public void deleteTheme(ThemeItem theme) {
-        compositeDisposable.add(
-                deleteThemeItem.delete(theme)
-                        .doOnComplete(this::refreshThemeList)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe()
-        );
+        Disposable disposable = deleteThemeItem.delete(theme)
+                .doOnComplete(this::refreshThemeList)
+                .subscribeOn(Schedulers.io())
+                .subscribe();
+        compositeDisposable.add(disposable);
         needToRefresh.postValue(true);
     }
 

@@ -105,10 +105,14 @@ public class ResultsFragment extends Fragment {
         );
         binding.articlesList.setAdapter(articlesAdapter);
     }
+    private void hide() {
+        binding.message.setVisibility(GONE);
+        binding.articlesList.setVisibility(GONE);
+        binding.progressBar.setVisibility(GONE);
+    }
 
     private void onError(@NonNull ErrorType errorType) {
         binding.message.setVisibility(VISIBLE);
-
         String message;
         switch (errorType) {
             case SERVER_ERROR: {
@@ -145,7 +149,7 @@ public class ResultsFragment extends Fragment {
 
     private void setupScreenStateObserver() {
         viewModel.getScreenState().observe(getViewLifecycleOwner(), state -> {
-            binding.progressBar.setVisibility(GONE);
+            hide();
             if (state instanceof ContentState) {
                 onSuccess((ContentState) state);
             } else {

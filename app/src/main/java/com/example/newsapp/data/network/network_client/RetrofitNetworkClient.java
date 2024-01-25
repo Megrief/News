@@ -27,7 +27,6 @@ public class RetrofitNetworkClient implements NetworkClient {
 
     @Override
     public Single<Response> doRequest(String query) {
-        Log.wtf("AAAAA", "-> in networkClient");
         ErrorType errorType;
         if (!isConnected()) {
             errorType = ErrorType.NO_INTERNET;

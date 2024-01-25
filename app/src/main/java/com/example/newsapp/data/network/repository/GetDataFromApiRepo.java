@@ -46,7 +46,7 @@ public class GetDataFromApiRepo implements GetDataByKeyRepository<String, Single
     }
 
     @NonNull
-    private List<Article> mapArticlesNetworkDto(List<ArticleNetworkDto> dtos) {
+    private List<Article> mapArticlesNetworkDto(@NonNull List<ArticleNetworkDto> dtos) {
         List<Article> result = new ArrayList<>();
         for (ArticleNetworkDto dto : dtos) {
             result.add(Mapper.toArticle(dto));

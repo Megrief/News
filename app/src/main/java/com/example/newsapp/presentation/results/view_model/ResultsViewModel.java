@@ -104,14 +104,14 @@ public class ResultsViewModel extends ViewModel {
     }
 
     public void showFiltersDialog(Context context) {
-        getThemeItemDbRepo.get()
+        Disposable disposable = getThemeItemDbRepo.get()
                 .zipWith(getLastSelectedRepo.get(), (themeItemList, lastSelected) ->
                         provideAlertDialog(themeItemList, lastSelected, context)
                 ).observeOn(AndroidSchedulers.mainThread())
                 .flatMapCompletable(builder -> Completable.fromRunnable(builder::show))
                 .subscribeOn(Schedulers.io())
                 .subscribe();
-
+        compositeDisposable.add(disposable);
     }
 
     public void refreshArticles() {
@@ -225,21 +225,24 @@ public class ResultsViewModel extends ViewModel {
                 .setSingleChoiceItems(preparedArray, lastSelectedIndex, (dialog, which) -> {
                     if (which != finalLastSelectedIndex) {
                         ThemeItem selected = themes.get(which);
-                        compositeDisposable.add(storeLastSelectedRepo
+                        Disposable disposable = storeLastSelectedRepo
                                 .store(selected.id)
                                 .doOnComplete(this::refreshArticles)
                                 .subscribeOn(Schedulers.io())
-                                .subscribe());
+                                .subscribe();
+
+                        compositeDisposable.add(disposable);
                         filtersState.postValue(true);
                     }
                     dialog.dismiss();
                 }).setNegativeButton(R.string.clear_filter, (dialog, which) -> {
                     boolean filtersOn = Boolean.TRUE.equals(filtersState.getValue());
                     if (filtersOn) {
-                        compositeDisposable.add(storeLastSelectedRepo.store(-1L)
+                        Disposable disposable = storeLastSelectedRepo.store(-1L)
                                 .doOnComplete(this::refreshArticles)
                                 .subscribeOn(Schedulers.io())
-                                .subscribe());
+                                .subscribe();
+                        compositeDisposable.add(disposable);
                         filtersState.postValue(false);
                     }
                     dialog.dismiss();

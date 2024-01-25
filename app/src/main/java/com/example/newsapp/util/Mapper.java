@@ -8,7 +8,6 @@ import com.example.newsapp.data.network.dto.ArticleNetworkDto;
 import com.example.newsapp.domain.entity.Article;
 import com.example.newsapp.domain.entity.ThemeItem;
 
-
 public class Mapper {
 
     @NonNull

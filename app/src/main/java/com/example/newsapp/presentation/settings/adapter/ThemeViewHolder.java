@@ -17,7 +17,7 @@ public class ThemeViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(ThemeItem theme) {
+    public void bind(@NonNull ThemeItem theme) {
         binding.themeName.setText(theme.theme);
     }
 
